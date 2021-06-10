@@ -83,8 +83,6 @@ void SuperMarket::listProducts() {
 
 SuperMarket sm;
 std::string prompt="{=^.^=} enter command or type 'help' > ";
-std::string cmd;
-bool quit=false;
 
 void doAdd() {
 	Product product;
@@ -132,6 +130,36 @@ void doList() {
 	sm.listProducts();
 }
 
+void doSellHelp() {}
+void doSellAdd() {}
+void doSellDel() {}
+void doSellList() {}
+void doSellOk() {}
+
+void doSell() {
+	std::vector <Product> products {};
+	bool quit=false;
+	std::string cmd;
+	std::cout << "*** Sell Products ***" << std::endl;
+	while(!quit) {
+		std::cout << prompt+" (sell mode): ";
+		std::cin >> cmd;
+		if(cmd=="quit") {
+			quit=true;
+		} else if(cmd=="help") {
+			doSellHelp();
+		} else if(cmd=="add") {
+			doSellAdd();
+		} else if(cmd=="del") {
+			doSellDel();
+		} else if(cmd=="list") {
+			doSellList();
+		} else if(cmd=="ok") {
+			doSellOk();
+		}
+	}
+}
+
 void doHelp() {
 	std::cout 
 			<< "*** Help ***" << std::endl
@@ -139,11 +167,13 @@ void doHelp() {
 			<< "add  -> add a product" << std::endl
 			<< "del  -> delete a product by id" << std::endl
 			<< "list -> list all products" << std::endl
+			<< "sell -> sell products" << std::endl
 			<< "quit -> quit program" << std::endl;
 }
 
 int main(void) {
-	
+	bool quit=false;
+	std::string cmd;
 	while(!quit) {
 		std::cout << prompt;
 		std::cin >> cmd;
@@ -157,6 +187,8 @@ int main(void) {
 			doDel();
 		} else if(cmd=="list") {
 			doList();
+		} else if(cmd=="sell") {
+			doSell();
 		}
 	}
 
